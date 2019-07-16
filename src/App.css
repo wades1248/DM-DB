@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+.error{
+  color: red;
+}
+button{
+  background-color: lightblue;
+}
+input{
+  display: inline-block;
+  border: 1px solid black;
+}
+select{
+  border: 1px solid black;
+}
