@@ -28,14 +28,7 @@ function difficultyFilter(difficulty, creatureNum, players, envCreatures, CRXP){
     const upperLimit =generateUpperDifficulty(difficulty, players)
     const lowerLimit =generateLowerDifficulty(difficulty, players)
     const creatureNumCoefficient = convertCreautureNum(creatureNum);
-    const multiply = (a,b,c)=> {return(a*b*c)};
-    const evenSplitCreatures = envCreatures.filter(creature => multiply(creature.XP,creatureNum, creatureNumCoefficient) > lowerLimit && multiply(creature.XP, creatureNum, creatureNumCoefficient) < upperLimit)        
-    /*const oneBigWithXLittle = oneBigXLittle(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures);
-    const twoBigWithXLittle = twoBigXLittle(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures);
-    const oneThirdWithFiller = oneThridFiller(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures);
-    const twoThirdWithFiller = twoThridFiller(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures);
-    const AllEncounters = evenSplitCreatures.concat(oneBigWithXLittle, twoBigWithXLittle, oneThirdWithFiller, twoThirdWithFiller)*/
-    const q = procedurallyGenerate (lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures,)
+    const q = procedurallyGenerate (lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures)
    
     return q
 
@@ -90,142 +83,12 @@ function convertCreautureNum(creatureNum) {
         return(4)
     }
 }
-/*
-function oneBigXLittle(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures){
-    const half = (a) => {return(a/2)};
-    const multiply = (a,b,c)=> {return(a*b*c)};
-    const littleCreatureNum = creatureNum-1;
-    const bigCreatures = envCreatures.filter(creature => multiply(creature.XP,1, creatureNumCoefficient) > half(lowerLimit) && multiply(creature.XP, 1, creatureNumCoefficient) < half(upperLimit));
-    const littleCreatures = envCreatures.filter(creature => multiply(creature.XP,littleCreatureNum, creatureNumCoefficient) > half(lowerLimit) && multiply(creature.XP, littleCreatureNum, creatureNumCoefficient) < half(upperLimit))
-    
-    function bigCreaturesAddQuantity (bigCreatures, ) {
-        if(bigCreatures.length > 0) {
-            bigCreatures.map(creature => {creature.Bquantity=1; return creature;
-        }) 
-            return bigCreatures;
-        }else{return null;}};
-    
-    function littleCreaturesAddQuantity (littleCreatures, littleCreatureNum ) {
-        if(littleCreatures.length > 0) {
-            littleCreatures.map(creature => {creature.Lquantity=littleCreatureNum; return littleCreatures;
-        })
-            return littleCreatures;
-        }else{return null;}};
-
-    const oneBigCreatureWithQuantity = bigCreaturesAddQuantity(bigCreatures);
-    const littleCreaturesWithQuantity = littleCreaturesAddQuantity(littleCreatures, littleCreatureNum);
-    const bigXLittle = {oneBigCreatureWithQuantity,littleCreaturesWithQuantity};
-    if(oneBigCreatureWithQuantity !== null && littleCreaturesWithQuantity !== null){
-        return (bigXLittle);
-    }else{
-        return [];
-        };
-    
-}
-function twoBigXLittle(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures){
-    const half = (a) => {return(a/2)};
-    const multiply = (a,b,c)=> {return(a*b*c)};
-    const littleCreatureNum = creatureNum-2;
-    const bigCreatures = envCreatures.filter(creature => multiply(creature.XP,2, creatureNumCoefficient) > half(lowerLimit) && multiply(creature.XP, 2, creatureNumCoefficient) < half(upperLimit));
-    const littleCreatures = envCreatures.filter(creature => multiply(creature.XP,littleCreatureNum, creatureNumCoefficient) > half(lowerLimit) && multiply(creature.XP, littleCreatureNum, creatureNumCoefficient) < half(upperLimit))
-    
-    function bigCreaturesAddQuantity (bigCreatures, ) {
-        if(bigCreatures.length > 0) {
-            bigCreatures.map(creature => {creature.BBquantity=2; return creature;
-        }) 
-            return bigCreatures;
-        }else{return null;}};
-    
-    function littleCreaturesAddQuantity (littleCreatures, littleCreatureNum ) {
-        if(littleCreatures.length > 0) {
-            littleCreatures.map(creature => {creature.LLquantity=littleCreatureNum; return littleCreatures;
-        })
-            return littleCreatures;
-        }else{return null;}};
-
-    const twoBigCreaturesWithQuantity = bigCreaturesAddQuantity(bigCreatures);
-    const littleCreaturesWithQuantity = littleCreaturesAddQuantity(littleCreatures, littleCreatureNum);
-    const bigXLittle = {twoBigCreaturesWithQuantity,littleCreaturesWithQuantity};
-    if(twoBigCreaturesWithQuantity !== null && littleCreaturesWithQuantity !== null){
-        return (bigXLittle);
-    }else{
-        return [];
-        };
-    
-}
-function oneThridFiller(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures){
-    const third = (a) => {return(a/3)};
-    const twoThirds = (a) => {return(2*a/3)};
-    const multiply = (a,b,c)=> {return(a*b*c)};
-    const littleCreatureNum = creatureNum-1;
-    const bigCreatures = envCreatures.filter(creature => multiply(creature.XP,1, creatureNumCoefficient) > third(lowerLimit) && multiply(creature.XP, 1, creatureNumCoefficient) < third(upperLimit));
-    const littleCreatures = envCreatures.filter(creature => multiply(creature.XP,littleCreatureNum, creatureNumCoefficient) > twoThirds(lowerLimit) && multiply(creature.XP, littleCreatureNum, creatureNumCoefficient) < twoThirds(upperLimit))
-    
-    function bigCreaturesAddQuantity (bigCreatures, ) {
-        if(bigCreatures.length > 0) {
-            bigCreatures.map(creature => {creature.BBBquantity=1; return creature;
-        }) 
-            return bigCreatures;
-        }else{return null;}};
-    
-    function littleCreaturesAddQuantity (littleCreatures, littleCreatureNum ) {
-        if(littleCreatures.length > 0) {
-            littleCreatures.map(creature => {creature.LLLquantity=littleCreatureNum; return littleCreatures;
-        })
-            return littleCreatures;
-        }else{return null;}};
-
-    const thirdBigCreaturesWithQuantity = bigCreaturesAddQuantity(bigCreatures);
-    const littleCreaturesWithQuantity = littleCreaturesAddQuantity(littleCreatures, littleCreatureNum);
-    const bigXLittle = {thirdBigCreaturesWithQuantity,littleCreaturesWithQuantity};
-    if(thirdBigCreaturesWithQuantity !== null && littleCreaturesWithQuantity !== null){
-        return (bigXLittle);
-    }else{
-        return [];
-        };
-    
-}
-function twoThridFiller(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures){
-    const third = (a) => {return(a/3)};
-    const twoThirds = (a) => {return(2*a/3)};
-    const multiply = (a,b,c)=> {return(a*b*c)};
-    const littleCreatureNum = creatureNum-2;
-    const bigCreatures = envCreatures.filter(creature => multiply(creature.XP,2, creatureNumCoefficient) > twoThirds(lowerLimit) && multiply(creature.XP, 2, creatureNumCoefficient) < twoThirds(upperLimit));
-    const littleCreatures = envCreatures.filter(creature => multiply(creature.XP,littleCreatureNum, creatureNumCoefficient) > third(lowerLimit) && multiply(creature.XP, littleCreatureNum, creatureNumCoefficient) < third(upperLimit))
-    
-    function bigCreaturesAddQuantity (bigCreatures, ) {
-        if(bigCreatures.length > 0) {
-            bigCreatures.map(creature => {creature.BBBBquantity=1; return creature;
-        }) 
-            return bigCreatures;
-        }else{return null;}};
-    
-    function littleCreaturesAddQuantity (littleCreatures, littleCreatureNum ) {
-        if(littleCreatures.length > 0) {
-            littleCreatures.map(creature => {creature.LLLLquantity=littleCreatureNum; return littleCreatures;
-        })
-            return littleCreatures;
-        }else{return null;}};
-
-    const twoThirdBigCreaturesWithQuantity = bigCreaturesAddQuantity(bigCreatures);
-    const littleCreaturesWithQuantity = littleCreaturesAddQuantity(littleCreatures, littleCreatureNum);
-    const bigXLittle = {twoThirdBigCreaturesWithQuantity,littleCreaturesWithQuantity};
-    if(twoThirdBigCreaturesWithQuantity !== null && littleCreaturesWithQuantity !== null){
-        return (bigXLittle);
-    }else{
-        return [];
-        };
-    
-}*/
 function procedurallyGenerate (lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures){
-    console.log(upperLimit)
     const countsperCRunfiltered = counterPerCr(upperLimit, creatureNumCoefficient, creatureNum, CRXP)
-    const countsPerCRfiltered = countsPerCRfilter(countsperCRunfiltered)
-    const finalCRarray = generateEncouterCRarray(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, countsPerCRfiltered)
-    console.log(countsPerCRfiltered)
+    const finalCRarray = tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, countsperCRunfiltered)
     return finalCRarray
 }
-function counterPerCr(upperLimit, creatureNumCoefficient, creatureNum, CRXP){
+function counterPerCr(upperLimit, creatureNumCoefficient, creatureNum,){
     let countsperCRunfiltered = []
     for(let j =1; j <=creatureNum; j++){    
         for(let i = 0; i < CRXP.length; i++){
@@ -249,84 +112,42 @@ function countsPerCRfilter(array){
     return counts;
 
 }
-function generateEncouterCRarray(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures, CRXP, countsPerCRfiltered){
-    let encounterCRs=[]
+function tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, countsperCRunfiltered){
+    const countsPerCRfiltered = countsPerCRfilter(countsperCRunfiltered)
     const CRsArray= Object.keys(countsPerCRfiltered)
-    for(let x= CRsArray.length-1; x>= 0; x--){
-        const CRvalue= CRsArray[x]
-        const calculcatedXP =(CRvalue*(countsPerCRfiltered[CRvalue])*creatureNumCoefficient)
-        if(calculcatedXP >lowerLimit && encounterCRs.length === 0){
-            for(let z = 0; z< countsPerCRfiltered[CRvalue]; z++){
-                encounterCRs.push(parseInt(CRvalue))
-            }
-        };
-        if(encounterCRs.length < creatureNum ){
-            encounterCRs = []
-        }
-        if(x===0 && encounterCRs.length === 0){
-            const bossCRs = makeBossEncounter(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, CRXP, CRsArray);
-            encounterCRs= bossCRs
-        }
-    }
-    return(encounterCRs)
-}
-function makeBossEncounter(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, CRXP, CRsArray){
-    console.log(upperLimit)
-    const boss= CRsArray[(CRsArray.length-1)] 
-    const minionNum= creatureNum-1;
-    const minionUpperLimit= upperLimit- parseInt(boss)
-    const minionLowerLimit= lowerLimit- parseInt(boss)
-    const countsperCRunfiltered = counterPerCr(CRXP, minionUpperLimit, creatureNumCoefficient, minionNum)
-    const countsPerCRfiltered = countsPerCRfilter(countsperCRunfiltered)
     let encounterCRs=[]
-    const minionsArray= Object.keys(countsPerCRfiltered)
-    for(let x= minionsArray.length-1; x>= 0; x--){
-        const CRvalue= minionsArray[x]
-        const calculcatedXP =(CRvalue*(countsPerCRfiltered[CRvalue])*creatureNumCoefficient)
-        if(calculcatedXP >minionLowerLimit && encounterCRs.length === 0){
-            for(let z = 0; z< countsPerCRfiltered[CRvalue]; z++){
-                encounterCRs.push(parseInt(CRvalue))
-            }
-            encounterCRs.push(parseInt(boss))
+  
+    for(let bossPosition = 0; bossPosition < (CRsArray.length-1); bossPosition++){
+    for(let bossNum = 0; creatureNum >= bossNum; bossNum++){
+            
+            const boss= CRsArray[(bossPosition)]
+            const minionNum= (creatureNum-bossNum);
+            const minionUpperLimit= (upperLimit- (parseInt(boss)*bossNum*creatureNumCoefficient))
+            const minionLowerLimit= (lowerLimit- (parseInt(boss)*bossNum*creatureNumCoefficient))
+            const countsperCRunfiltered = counterPerCr(minionUpperLimit, creatureNumCoefficient, minionNum)
+            const countsPerCRfiltered = countsPerCRfilter(countsperCRunfiltered)
+            const minionsArray= Object.keys(countsPerCRfiltered)
+            for(let x= minionsArray.length-1; x>= 0; x--){
+                const CRvalue= minionsArray[x]
+                const calculcatedXP =(CRvalue*(countsPerCRfiltered[CRvalue])*creatureNumCoefficient)
+                if(calculcatedXP >minionLowerLimit && encounterCRs.length === 0){
+                    for(let z = 0; z< countsPerCRfiltered[CRvalue]; z++){
+                        encounterCRs.push(parseInt(CRvalue))
+
+                    }
+                    for(let h = 1; h <= bossNum; h++ ){
+                        encounterCRs.push(parseInt(boss))
+                        console.log(boss)
+                    } 
+                }
+            if(encounterCRs.length < creatureNum ){
+                    encounterCRs = []
+            }else{break;}
+            } 
+
         }
-        if(encounterCRs.length < creatureNum ){
-            encounterCRs = []
-        }
-        if(x===0 && encounterCRs.length === 0){
-            const bossCRs = make2BossEncounter(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, CRXP);
-            encounterCRs= bossCRs
-        }
+  
     }
-    return encounterCRs    
-}
-function make2BossEncounter(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum,CRXP, CRsArray){
-    console.log('ruuuuun')
-    const boss1= CRsArray[CRsArray.length-1]
-    const boss2= CRsArray[CRsArray.length-1] 
-    const minionNum= creatureNum-2;
-    const minionUpperLimit= upperLimit- (parseInt(boss1)+parseInt(boss2))
-    const minionLowerLimit= lowerLimit- (parseInt(boss1)+parseInt(boss2))
-    const countsperCRunfiltered = counterPerCr(CRXP, minionUpperLimit, creatureNumCoefficient, minionNum)
-    const countsPerCRfiltered = countsPerCRfilter(countsperCRunfiltered)
-    let encounterCRs=[]
-    const minionsArray= Object.keys(countsPerCRfiltered)
-    for(let x= minionsArray.length-1; x>= 0; x--){
-        const CRvalue= minionsArray[x]
-        const calculcatedXP =(CRvalue*(countsPerCRfiltered[CRvalue])*creatureNumCoefficient)
-        if(calculcatedXP >minionLowerLimit && encounterCRs.length === 0){
-            for(let z = 0; z< countsPerCRfiltered[CRvalue]; z++){
-                encounterCRs.push(parseInt(CRvalue))
-            }
-            encounterCRs.push(parseInt(boss1, boss2))
-        };
-        if(encounterCRs.length < creatureNum ){
-            encounterCRs = []
-        }
-        if(x===0 && encounterCRs.length === 0){
-            //const bossCRs = make2BossEncounter(CRsArray, upperLimit, lowerLimit, creatureNum, creatureNumCoefficient, CRXP,);
-            //encounterCRs= bossCRs
-        }
-    }
-    return encounterCRs    
+    return encounterCRs
 }
 export default Generator;
