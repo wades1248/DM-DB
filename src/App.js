@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import Welcome from './Welcome';
-import EncouterGenerator from './EncouterGenerator';
-import InitiativeTracker from './InitiativeTracker'
+import Welcome from './PartyInput/Welcome';
+import EncouterGenerator from './Encounter/EncouterGenerator';
+import InitiativeTracker from './InitiativeTracker/InitiativeTracker'
 import './App.css';
 
 class App extends Component {
