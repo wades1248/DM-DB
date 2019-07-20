@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
+import InitiativeDisplayCard from './InitiativeDisplayCard';
 
 class InitiativeList extends Component {
     render() {
+        const InitiativeList = this.props.state.initiative.map((item, i) =>
+                <InitiativeDisplayCard
+                item={item}
+                key={i+1}
+                />
+            )
+
         return (
-            <div class="list">
-                ORDERED LIST GOES HERE!!! (THE FORM TO ENTER INITIATIVES WILL BE COLLASPIBLE)
+            <div className="list">
+                {InitiativeList}
             </div>
         )
     }

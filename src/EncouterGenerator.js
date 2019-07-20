@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import EncounterPreview from './EncounterPreview';
 import Generator from './Generator'
 
@@ -16,10 +16,26 @@ class EncounterGenerator extends Component {
             players: players
         }
         
-        Generator(params);
+        const encounter= Generator(params);
+        this.props.handleEncounter(encounter);
+    }
+    componentDidMount(){
+      this.props.clearInitiative();
     }
 
     render() {
+        const creatures= this.props.state.creatures
+        function renderPreview(creatures, state){
+            if(creatures.length !==0){
+                return <EncounterPreview
+                    state={state}
+                />
+            }else{
+                return null
+            }
+            
+        }
+        const Preview = renderPreview(creatures, this.props.state)
         return(
             <div>
                 <div className='header'>
@@ -83,9 +99,8 @@ class EncounterGenerator extends Component {
       <br/>
       <button type="submit">Generate Encounter</button>
     </form>
-    <EncounterPreview
-        state={this.props.state}
-    />
+    {Preview}
+    <Link to='/'><button>Back</button></Link>
     </div>
     )
     }

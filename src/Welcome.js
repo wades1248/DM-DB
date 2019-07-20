@@ -20,7 +20,7 @@ class Welcome extends Component {
                 {/*<DMDBInput/>*/}
                 <PartyPreview
                     state={this.props.state}
-                    onRemoveNewPlayer={this.props.onRemoveNewPlayer}
+                    onRemovePlayer={this.props.onRemovePlayer}
                 />
             </div>
         )

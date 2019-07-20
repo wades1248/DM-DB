@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     players:[],
     creatures:[],
-    initiative:[]
+    initiative:[],
   };
 
   addPlayer = player => {
@@ -18,18 +18,42 @@ class App extends Component {
     })
   }
 
-  removeNewPlayer = playerID => {
+  removePlayer = playerID => {
     this.setState({
       players: this.state.players.filter(p => p.id !== playerID)
     })
   }
 
-  encouterGenerate = encounterCreatures => {
+  handleEncounter = encounterCreatures => {
+    if(encounterCreatures[0] !== undefined){
+      this.setState({
+        creatures: encounterCreatures
+      })
+      this.setState({
+      initiative: (encounterCreatures.map(creature => {
+        return{
+          ...creature,
+          initiative:(Math.floor(Math.random()*20)+creature.DexMod+1)
+        }
+      })).sort((a,b)=> (a.initiative < b.initiative)? 1 : -1)
+    })}
+    else{
+      this.setState({
+        creatures: ['error']
+      })
+    }
+  }
+  handleInitiative = player => {
     this.setState({
-      creatures: encounterCreatures
+      initiative: [...this.state.initiative, player].sort((a,b)=> (a.initiative < b.initiative)? 1 : -1)
+    });
+  }
+  
+  clearInitiative = () => {
+    this.setState({
+      initiative: []
     })
   }
-
   render(){
     return(
       <main className='App'>
@@ -39,24 +63,29 @@ class App extends Component {
             render={() =>
             <Welcome
               onAddPlayer={this.addPlayer}
-              onRemoveNewPlayer={this.removeNewPlayer}
+              onRemovePlayer={this.removePlayer}
               state={this.state}
             />}
           />
           <Route
             path='/gen'
-            render={({history}) =>
+            render={() =>
               <EncouterGenerator
                 state={this.state}
-                encounterGenerate={this.encouterGenerate}
+                handleEncounter={this.handleEncounter}
+                clearInitiative={this.clearInitiative}
               />
             }
           />
           <Route
             path='/tracker'
-            render={({history}) =>{
-              return <InitiativeTracker/>
-            }}
+            render={() =>
+              <InitiativeTracker
+                state={this.state}
+                onRemovePlayer={this.removePlayer}
+                handleInitiative={this.handleInitiative}
+              />
+            }
           />
         </div>
       </main>

@@ -1,5 +1,9 @@
+*{
+  list-style-type: none;
+}
 .App {
   text-align: center;
+  list-style-type: none;
 }
 .error{
   color: red;
@@ -13,4 +17,11 @@ input{
 }
 select{
   border: 1px solid black;
+}
+li{
+  border: 1px solid black;
+  background-color: lightgoldenrodyellow;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3px;
 }

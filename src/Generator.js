@@ -7,8 +7,10 @@ function Generator(params) {
     const {difficulty, environment, creatureNum, players } = params
     const rawCreatures = Creatures;
     const envCreatures =environmentalFilter(environment, rawCreatures);
-    const encounterCreatures = difficultyFilter(difficulty, creatureNum, players, envCreatures, CRXP);
-    console.log(encounterCreatures);
+    const randomEnvCreatures = shuffleArray(envCreatures);
+    const encounterXParray = difficultyFilter(difficulty, creatureNum, players, envCreatures, CRXP);
+    const encounter = makeEncounterArray(encounterXParray, randomEnvCreatures)
+    return encounter;
 }
 function environmentalFilter(environment, creatures) {
     if(environment !== 'any'){
@@ -28,9 +30,9 @@ function difficultyFilter(difficulty, creatureNum, players, envCreatures, CRXP){
     const upperLimit =generateUpperDifficulty(difficulty, players)
     const lowerLimit =generateLowerDifficulty(difficulty, players)
     const creatureNumCoefficient = convertCreautureNum(creatureNum);
-    const q = procedurallyGenerate (lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures)
+    const xpArray = procedurallyGenerate (lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures)
    
-    return q
+    return xpArray
 
     
 }
@@ -137,7 +139,6 @@ function tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, cre
                     }
                     for(let h = 1; h <= bossNum; h++ ){
                         encounterCRs.push(parseInt(boss))
-                        console.log(boss)
                     } 
                 }
             if(encounterCRs.length < creatureNum ){
@@ -149,5 +150,16 @@ function tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, cre
   
     }
     return encounterCRs
+}
+function shuffleArray (array){
+    for(let i = array.length -1; i > 0; i--){
+        let j = Math.floor(Math.random()*(i+1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array
+}
+function makeEncounterArray(encounterXParray, randomEnvCreatures){
+    const encounter = encounterXParray.map(x=> randomEnvCreatures.find(creature => creature.XP===x))
+    return encounter;
 }
 export default Generator;
