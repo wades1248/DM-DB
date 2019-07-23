@@ -10,19 +10,26 @@ class PartyInput extends Component {
         this.setState({
             error: null
         })
-        const {playerName, playerLevel, AC, PP, } = event.target
+        const {playerName, playerLevel, AC, PP, DmId } = event.target
         const player = {
             name: playerName.value,
             level: playerLevel.value, 
             AC: AC.value,
             PP: PP.value,
-            id: this.props.state.players.length+1
+            id: this.props.state.players.length+1, 
+            //DmId: DmId.value
         }
         const testName= player.name.trim();
+        const testDmId =player.DmId.trim();
         if(testName.length === 0) {
-             const nameError = 'Please Enter a Valid Character Name';
+             const nameError = 'Please Enter a Valid Character Name.';
             this.setState({
                 error: nameError
+            });
+        }else if(testDmId.length === 0){
+            const dmIdError = 'Please Enter a Valid DM ID.'
+            this.setState({
+                error: dmIdError
             });
         }else{
             this.handleSubmit(player);
@@ -129,7 +136,8 @@ class PartyInput extends Component {
               <option value='28'>28</option>
               <option value='29'>29</option>
               <option value='30'>30</option>
-            </select>           
+            </select>
+            {/*<input type='text' name='DmId' placeholder='Spencer1234' required/>*/}           
           <button type="submit" name='addPlayer'>
             Add Player
           </button>

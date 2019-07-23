@@ -30,7 +30,7 @@ class InitiativeTracker extends Component {
         return(
             <div>
                 <h1>Initiative Tracker</h1>
-                <p>Please enter the initiative of the party members below(creauture initiate has been rolled for you).</p>
+                <p>Please enter the initiative of the party members below (creature initiative has been rolled for you).</p>
                 {PartyInitiativeInput(this.state.players, this.props.onRemovePlayer, this.onRemovePlayerFromInputList , this.props.handleInitiative)}
                 <InitiativeList
                     state={this.props.state}
