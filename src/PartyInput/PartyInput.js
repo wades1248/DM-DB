@@ -10,7 +10,7 @@ class PartyInput extends Component {
         this.setState({
             error: null
         })
-        const {playerName, playerLevel, AC, PP, DmId } = event.target
+        const {playerName, playerLevel, AC, PP, /*DmId*/ } = event.target
         const player = {
             name: playerName.value,
             level: playerLevel.value, 
@@ -20,17 +20,17 @@ class PartyInput extends Component {
             //DmId: DmId.value
         }
         const testName= player.name.trim();
-        const testDmId =player.DmId.trim();
+        /*const testDmId =player.DmId.trim();*/
         if(testName.length === 0) {
              const nameError = 'Please Enter a Valid Character Name.';
             this.setState({
                 error: nameError
             });
-        }else if(testDmId.length === 0){
+        /*}else if(testDmId.length === 0){
             const dmIdError = 'Please Enter a Valid DM ID.'
             this.setState({
                 error: dmIdError
-            });
+            });*/
         }else{
             this.handleSubmit(player);
         }        
