@@ -40,7 +40,7 @@ class EncounterGenerator extends Component {
             <div>
                 <div className='header'>
       <h1>Encounter Generator</h1>
-      <p>Using the information provided for your party we will generate a random encounter given the parameters set below</p>
+      <p>Using the information provided for your party we will generate a random encounter given the parameters set below.</p>
     </div>
     <form className="encounterParams" onSubmit={this.handleSubmit}>
       <legend className='formHead'>Options</legend>
