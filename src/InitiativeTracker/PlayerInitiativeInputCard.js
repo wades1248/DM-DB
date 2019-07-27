@@ -14,8 +14,8 @@ class PlayerInitiativeInput extends Component {
             id: this.props.player.id,
             name: this.props.player.name,
             level: this.props.player.level,
-            AC: this.props.player.AC,
-            PP: this.props.player.PP,
+            ac: this.props.player.ac,
+            pp: this.props.player.pp,
             initiative: parseInt(initiative.value)
         }
         this.props.handleInitiative(player);

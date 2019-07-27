@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import Welcome from './PartyInput/Welcome';
 import EncouterGenerator from './Encounter/EncouterGenerator';
-import InitiativeTracker from './InitiativeTracker/InitiativeTracker'
+import InitiativeTracker from './InitiativeTracker/InitiativeTracker';
+import config from './config';
 import './App.css';
 
 class App extends Component {
@@ -10,6 +11,9 @@ class App extends Component {
     players:[],
     creatures:[],
     initiative:[],
+    allPlayers:[],
+    allCreatures: [],
+    error: {}
   };
 
   addPlayer = player => {
@@ -33,7 +37,7 @@ class App extends Component {
       initiative: (encounterCreatures.map(creature => {
         return{
           ...creature,
-          initiative:(Math.floor(Math.random()*20)+creature.DexMod+1)
+          initiative:(Math.floor(Math.random()*20)+creature.dexmod+1)
         }
       })).sort((a,b)=> (a.initiative < b.initiative)? 1 : -1)
     })}
@@ -54,6 +58,51 @@ class App extends Component {
       initiative: []
     })
   }
+  GetByDMID = DMID => {
+     const allPlayers = this.state.allPlayers
+     const partyPlayers = allPlayers.filter(player => player.dmid === DMID)
+     this.setState({
+       players: partyPlayers
+     })
+  }
+  componentDidMount() {
+    fetch(`${config.API_ENDPOINT}/players`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${config.API_KEY}`
+      }
+    })
+    .then(res => {
+      if(!res.ok){
+        return res.json().then(error => Promise.reject(error))
+      }
+      return res.json()
+    })
+    .then(res => this.setState({allPlayers: res}))
+    .catch(error => {
+      console.error(error)
+      this.setState({error})
+    })
+    fetch(`${config.API_ENDPOINT}/creatures`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${config.API_KEY}`
+      }
+    })
+    .then(res => {
+      if(!res.ok){
+        return res.json().then(error => Promise.reject(error))
+      }
+      return res.json()
+    })
+    .then(res => this.setState({allCreatures: res}))
+    .catch(error => {
+      console.error(error)
+      this.setState({error})
+    })
+  }
   render(){
     return(
       <main className='App'>
@@ -64,6 +113,7 @@ class App extends Component {
             <Welcome
               onAddPlayer={this.addPlayer}
               onRemovePlayer={this.removePlayer}
+              GetByDMID={this.GetByDMID}
               state={this.state}
             />}
           />

@@ -9,11 +9,13 @@ class EncounterGenerator extends Component {
         event.preventDefault();
         const {difficulty, environment, creatureNum } = event.target;
         const players=this.props.state.players
+        const allCreatures = this.props.state.allCreatures
         const params = {
             difficulty: difficulty.value, 
             environment: environment.value,
             creatureNum: creatureNum.value, 
-            players: players
+            players: players,
+            allCreatures: allCreatures
         }
         
         const encounter= Generator(params);
@@ -50,12 +52,11 @@ class EncounterGenerator extends Component {
           <option value='medium'>Moderate</option>
           <option value='hard'>Hard</option>
           <option value='deadly'>Deadly</option>
-          {/*<option value='impossible'>Impossible</option>*/}
         </select>      
       <label>Environment</label>
         <select name='environment' defaultValue='any'>
           <option value='any'>Any</option>
-          <option value='artic'>Artic</option>
+          <option value='artic'>Arctic</option>
           <option value='coastal'>Coastal</option>
           <option value='desert'>Desert</option>
           <option value='forest'>Forest</option>

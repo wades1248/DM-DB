@@ -10,14 +10,16 @@ class Welcome extends Component {
             <div className='Welcome'>
                 <div className= 'welcomeBanner'>
                     <h1>Welcome to DM DB</h1>
-                    <h2>an encouter generator and initiative tracker for Dungeons and Dragons 5th Edition.</h2>
-                    <p>Please enter your players' information using the form below, or if you party is already in the DB, enter your DM ID below.</p>
+                    <h2>An encouter generator and initiative tracker for Dungeons and Dragons 5th Edition.</h2>
+                    <p>Please enter your players' information using the form below, or if your party is already in the DB, enter your DM ID below.</p>
                 </div>
                 <PartyInput
                     onAddPlayer={this.props.onAddPlayer}
                     state={this.props.state}
                 />
-                {/*<DMDBInput/>*/}
+                <DMDBInput
+                    GetByDMID={this.props.GetByDMID}
+                />
                 <PartyPreview
                     state={this.props.state}
                     onRemovePlayer={this.props.onRemovePlayer}

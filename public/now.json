@@ -1,0 +1,15 @@
+{
+    "version": 2, 
+    "alias": "dm-db",
+    "name": "DM-DB",
+    "routes": [
+        {
+            "src": "^/static/(.*)",
+            "dest": "^/static/$1"
+        },
+        {
+            "src": ".*",
+            "dest": "/index.html"
+        }
+    ]
+}

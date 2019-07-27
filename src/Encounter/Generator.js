@@ -1,11 +1,11 @@
-import makeCreatures from './Creatures';
+//import makeCreatures from './Creatures';
 import playerThreshold from './PlayerThreshold';
 import CRXP from './CRXP';
 
 function Generator(params) {
-    const Creatures = makeCreatures();
-    const {difficulty, environment, creatureNum, players } = params
-    const rawCreatures = Creatures;
+    //const Creatures = makeCreatures();
+    const {difficulty, environment, creatureNum, players, allCreatures } = params
+    const rawCreatures = allCreatures;
     const envCreatures =environmentalFilter(environment, rawCreatures);
     const randomEnvCreatures = shuffleArray(envCreatures);
     const encounterXParray = difficultyFilter(difficulty, creatureNum, players, envCreatures, CRXP);
@@ -17,7 +17,6 @@ function environmentalFilter(environment, creatures) {
         let filterCreatures = creatures.filter(creature => 
            creature[environment] === true
        )
-       console.log(filterCreatures);
        return(filterCreatures);
    }
    else{
@@ -159,7 +158,7 @@ function shuffleArray (array){
     return array
 }
 function makeEncounterArray(encounterXParray, randomEnvCreatures){
-    const encounter = encounterXParray.map(x=> randomEnvCreatures.find(creature => creature.XP===x))
+    const encounter = encounterXParray.map(x=> randomEnvCreatures.find(creature => creature.xp===x))
     return encounter;
 }
 export default Generator;
