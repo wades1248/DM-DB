@@ -7,7 +7,7 @@ class PlayersList extends Component{
         function showLink(array){
             if(array.length !== 0){
                 return(
-                    <Link to='/gen'><button type="button">DONE</button></Link> 
+                    <Link to='/gen'><button type="button">Proceed to Encounter Generator</button></Link> 
                 )
             }
             else{
