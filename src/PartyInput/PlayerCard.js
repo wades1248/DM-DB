@@ -37,7 +37,7 @@ class PlayerCard extends Component {
                 <p>Level:{this.props.player.level}</p>
                 <p>AC:{this.props.player.ac}</p>
                 <p>Passive Perception:{this.props.player.pp}</p>
-                <button onClick={this.onRemovePlayer}>Remove From List</button> 
+                <button onClick={this.onRemovePlayer}>Remove From Party</button> 
                 <button onClick={this.onDeletePlayer}>Delete From Database</button>
             </li>           
         )
