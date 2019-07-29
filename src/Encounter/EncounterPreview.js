@@ -7,7 +7,7 @@ class EncounterPreview extends Component {
         const EncounterXpArray = checkCreauturesXP(this.props.state.creatures)
         function checkCreauturesXP(creatures){
             if(creatures[0] !== 'error'){
-                return creatures.map(creature => creature.XP)
+                return creatures.map(creature => creature.xp)
             }else{
                 return []
             }

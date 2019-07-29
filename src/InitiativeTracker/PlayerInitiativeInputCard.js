@@ -26,8 +26,8 @@ class PlayerInitiativeInput extends Component {
             <form className="enterInitiatives" onSubmit={this.onSubmit}>
                <h3 className="PlayerName" name='playerName' value={this.props.player.name}>{this.props.player.name}</h3>
                 <p name='level' value={this.props.player.level}>Level:{this.props.player.level}</p>
-                <p name='AC' value={this.props.player.AC}>AC:{this.props.player.AC}</p>
-                <p name='PP'value={this.props.player.PP}>Passive Perception:{this.props.player.PP}</p>
+                <p name='AC' value={this.props.player.ac}>AC:{this.props.player.AC}</p>
+                <p name='PP'value={this.props.player.pp}>Passive Perception:{this.props.player.PP}</p>
                 <select name='initiative' required defaultValue='15'>
                     <option value='0'>Critical Fail</option>
                     <option value='1'>1</option>
