@@ -3,6 +3,7 @@ import {Route} from 'react-router-dom';
 import Welcome from './PartyInput/Welcome';
 import EncouterGenerator from './Encounter/EncouterGenerator';
 import InitiativeTracker from './InitiativeTracker/InitiativeTracker';
+import UpdatePlayer from './PartyInput/EditPlayer';
 import config from './config';
 import './App.css';
 
@@ -64,6 +65,10 @@ class App extends Component {
      this.setState({
        players: partyPlayers
      })
+  }
+  updatePlayer = player => {
+    this.removePlayer(player.id)
+    this.addPlayer(player)
   }
   componentDidMount() {
     fetch(`${config.API_ENDPOINT}/players`, {
@@ -134,6 +139,15 @@ class App extends Component {
                 state={this.state}
                 onRemovePlayer={this.removePlayer}
                 handleInitiative={this.handleInitiative}
+              />
+            }
+          />
+          <Route
+            path='/update/:playerID'
+            render={(props) => 
+              <UpdatePlayer
+                {...props}
+                onUpdatePlayer={this.updatePlayer}
               />
             }
           />

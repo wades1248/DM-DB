@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import config from '../config'
+import {Link} from 'react-router-dom';
+import config from '../config';
 
 class PlayerCard extends Component {
     onRemovePlayer = e => {
@@ -37,7 +38,10 @@ class PlayerCard extends Component {
                 <p>Level:{this.props.player.level}</p>
                 <p>AC:{this.props.player.ac}</p>
                 <p>Passive Perception:{this.props.player.pp}</p>
-                <button onClick={this.onRemovePlayer}>Remove From Party</button> 
+                <button onClick={this.onRemovePlayer}>Remove From Party</button>
+                <Link to={`/update/${this.props.player.id}`}>
+                    <button>Update Player</button>
+                </Link>
                 <button onClick={this.onDeletePlayer}>Delete From Database</button>
             </li>           
         )
