@@ -25,21 +25,30 @@ class InitiativeDisplayCard extends Component {
         function showCRandXP(item){
             if(item.cr){
                 return(
-                    <p>CR: {item.cr}  XP: {item.xp}</p>
+                    <p>CR: {item.cr} XP: {item.xp}</p>      
                 )
             }else{
-                return null
+                return <p>Level: {item.level}</p>
             }
         }
         return(
             <li>
-                <p>Initiative: {this.props.item.initiative}</p>
-                <h3>{this.props.item.name}</h3>
-                {showCRandXP(this.props.item)}
-                <p>AC: {this.props.item.ac}</p>
-                <label>HP</label>
-                <input type='integer' onSubmit={this.preventSubmit}/>
-                {showPerception(this.props.item)}
+                <div className="heading">
+                    <div className="initTitle">
+                        <h3>{this.props.item.name}</h3>
+                        {showCRandXP(this.props.item)}
+                    </div>
+                    <div className="initiativeDisplay">
+                        <p>Initiative:</p>
+                        <h3>{this.props.item.initiative}</h3>
+                    </div>
+                </div>
+                <div className="details">
+                    <p>AC: {this.props.item.ac}</p>
+                    <label>HP:</label>
+                    <input className="hp" type='integer' onSubmit={this.preventSubmit}/>
+                    {showPerception(this.props.item)}
+                </div>
                 {showSource(this.props.item)}
             </li>
         )

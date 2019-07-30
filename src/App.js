@@ -53,7 +53,11 @@ class App extends Component {
       initiative: [...this.state.initiative, player].sort((a,b)=> (a.initiative < b.initiative)? 1 : -1)
     });
   }
-  
+  removeFromInitiative = item => {
+    this.setState({
+      initiative: this.state.initiative.filter(i => (i.name && i.id) !== (item.name && item.id))
+    })
+  }
   clearInitiative = () => {
     this.setState({
       initiative: []

@@ -34,11 +34,13 @@ class PlayerCard extends Component {
     render(){
         return(
             <li>
-               <h3 className="PlayerName">{this.props.player.name}</h3>
-                <p>Level:{this.props.player.level}</p>
-                <p>AC:{this.props.player.ac}</p>
-                <p>Passive Perception:{this.props.player.pp}</p>
-                <button onClick={this.onRemovePlayer}>Remove From Party</button>
+                <h2 className="PlayerName">{this.props.player.name}</h2>
+                <h3>Level:{this.props.player.level}</h3>
+                <div className="details">
+                    <p>AC:{this.props.player.ac}</p>
+                    <p>Passive Perception:{this.props.player.pp}</p>
+                </div>    
+                <button onClick={this.onRemovePlayer}>Remove From Party</button>               
                 <Link to={`/update/${this.props.player.id}`}>
                     <button>Update Player</button>
                 </Link>

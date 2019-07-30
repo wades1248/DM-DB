@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import CreatureCard from './CreatureCard'
 
 class EncounterPreview extends Component {
@@ -34,7 +33,6 @@ class EncounterPreview extends Component {
                         {EncounterXP}
                         <h2>Creatures:</h2>
                         {creatureList}
-                        <Link to='/tracker'><button>NEXT</button></Link>
                     </div>
                 )
             }else{

@@ -4,8 +4,8 @@ import React, {Component} from 'react'
 class PlayerInitiativeInput extends Component {
     onRemovePlayer = e => {
         e.preventDefault();
-        const playerID = this.props.player.id;
-        this.props.onRemovePlayer(playerID)
+        const player = this.props.player;
+        this.props.onRemovePlayerFromInputList(player)
     }
     onSubmit = e => {
         e.preventDefault();
@@ -78,7 +78,7 @@ class PlayerInitiativeInput extends Component {
                     <option value='100'>Critical</option>
                 </select>
                 <button type='submit'>Add Player</button>
-                <button onClick={this.onRemovePlayer}>Remove</button> 
+                <button type='button' onClick={this.onRemovePlayer}>Remove</button> 
             </form>
         )
     }

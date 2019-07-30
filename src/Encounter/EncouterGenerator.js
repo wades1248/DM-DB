@@ -42,7 +42,8 @@ class EncounterGenerator extends Component {
             <div>
                 <div className='header'>
       <h1>Encounter Generator</h1>
-      <p>Using the information provided for your party we will generate a random encounter given the parameters set below.</p>
+      <p className="instructions">Using the information provided for your party we will generate a random encounter given the parameters set below
+      or if you'd like you may skip straight to the Initiative Tracker by clicking "Next".</p>
     </div>
     <form className="encounterParams" onSubmit={this.handleSubmit}>
       <legend className='formHead'>Options</legend>
@@ -101,7 +102,8 @@ class EncounterGenerator extends Component {
       <button type="submit">Generate Encounter</button>
     </form>
     {Preview}
-    <Link to='/'><button>Back</button></Link>
+    <Link to='/'><button className="nav">Back</button></Link>
+    <Link to='/tracker'><button className="nav">NEXT</button></Link>
     </div>
     )
     }
