@@ -23,6 +23,7 @@ class EncounterGenerator extends Component {
     }
     componentDidMount(){
       this.props.clearInitiative();
+      this.props.clearEncounter();
     }
 
     render() {
@@ -103,7 +104,7 @@ class EncounterGenerator extends Component {
     </form>
     {Preview}
     <Link to='/'><button className="nav">Back</button></Link>
-    <Link to='/tracker'><button className="nav">NEXT</button></Link>
+    <Link to='/tracker'><button className="nav">Next</button></Link>
     </div>
     )
     }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import Welcome from './PartyInput/Welcome';
-import EncouterGenerator from './Encounter/EncouterGenerator';
+import EncounterGenerator from './Encounter/EncouterGenerator';
 import InitiativeTracker from './InitiativeTracker/InitiativeTracker';
 import UpdatePlayer from './PartyInput/EditPlayer';
 import config from './config';
@@ -61,6 +61,11 @@ class App extends Component {
   clearInitiative = () => {
     this.setState({
       initiative: []
+    })
+  }
+  clearEncounter = () => {
+    this.setState({
+      creatures: []
     })
   }
   GetByDMID = DMID => {
@@ -129,10 +134,11 @@ class App extends Component {
           <Route
             path='/gen'
             render={() =>
-              <EncouterGenerator
+              <EncounterGenerator
                 state={this.state}
                 handleEncounter={this.handleEncounter}
                 clearInitiative={this.clearInitiative}
+                clearEncounter={this.clearEncounter}
               />
             }
           />
