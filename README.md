@@ -1,5 +1,7 @@
 # DM DB
 
+[Live Page](https://dm-db.now.sh/)
+
 ## Summary
 DM DB is an encouter generator and initiative tracker for Dungeons and Dragons 5th edition. Users may enter and save player information using a "DM ID". Player information is used to create random encounters based upon difficulty, environment, and number of creautures. Users may also track initiative (turn order) with the Initiative tracker. This tracker can be used with or without a generated encounter.
 
