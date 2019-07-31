@@ -1,13 +1,20 @@
 *{
   list-style-type: none;
-
 }
 body{
+  background-image: linear-gradient(to right,black, grey,lightgrey, white,white,white, white, white, white,white, white, lightgrey, grey, black)
+}
+#root{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(114, 89, 89);
-  color: white;
+  background-image: url(https://github.com/wades1248/DM-DB/blob/master/Scan%201.jpeg?raw=true);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center, center;
+  background-color: rgba(19, 95, 19, 0);
+  color: rgb(31, 68, 45);
   text-align: center;
   list-style-type: none;
   height: 100%;
@@ -17,6 +24,7 @@ body{
   padding-top:7%;
   max-width: 500px;
   margin: 15px;  
+  position: relative;
 }
 .error{
   color: rgb(165, 21, 21);
@@ -38,8 +46,8 @@ select{
   border: 1px solid black;
 }
 li, form{
-  color: black;
-  background-color: rgb(255, 255, 255);
+  color: white;
+  background-color: rgba(25, 121, 68, 0.466);
   border-radius: 15px;
   margin-left: auto;
   margin-right: auto;
@@ -82,4 +90,13 @@ legend{
 }
 .nav{
   height: 35px;
+}
+@media screen and (max-width: 768px){
+  body{
+    
+    background-color: white;
+  }
+  #root{
+    background-image: none;
+  }
 }
