@@ -68,7 +68,7 @@ class EncounterGenerator extends Component {
           <option value='mountain'>Mountain</option>
           <option value='swamp'>Swamp</option>
           <option value='underdark'>Underdark</option>
-          <option value='underWater'>Under Water</option>
+          <option value='underwater'>Under Water</option>
           <option value='urban'>Urban</option>
         </select>
       </label>
