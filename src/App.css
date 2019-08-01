@@ -1,5 +1,6 @@
 *{
   list-style-type: none;
+  font-weight: bold;
 }
 html{
   background-image: linear-gradient(to right,black, grey,lightgrey, white,white,white, white, white, white,white, white, lightgrey, grey, black);
@@ -69,7 +70,14 @@ li, form{
 .initiativeDisplay{
   display: block;
   width: 100px;
+  margin-top: 5px;
 
+}
+input:checked~span{
+  color: blue;
+}
+textarea{
+  margin-top: 10px;
 }
 .initTitle{
   text-align: center;

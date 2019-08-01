@@ -55,7 +55,7 @@ class EncounterGenerator extends Component {
           <option value='hard'>Hard</option>
           <option value='deadly'>Deadly</option>
         </select>  
-        </label>    
+        </label><br/>    
       <label>Environment
         <select name='environment' defaultValue='any'>
           <option value='any'>Any</option>
