@@ -48,14 +48,15 @@ class EncounterGenerator extends Component {
     </div>
     <form className="encounterParams" onSubmit={this.handleSubmit}>
       <legend className='formHead'>Options</legend>
-      <label>Difficulty</label>
+      <label>Difficulty
         <select name='difficulty' defaultValue='moderate'>
           <option value='easy'>Easy</option>
           <option value='medium'>Moderate</option>
           <option value='hard'>Hard</option>
           <option value='deadly'>Deadly</option>
-        </select>      
-      <label>Environment</label>
+        </select>  
+        </label>    
+      <label>Environment
         <select name='environment' defaultValue='any'>
           <option value='any'>Any</option>
           <option value='artic'>Arctic</option>
@@ -70,8 +71,9 @@ class EncounterGenerator extends Component {
           <option value='underWater'>Under Water</option>
           <option value='urban'>Urban</option>
         </select>
+      </label>
       <br/>
-      <label>Number of Creatures</label>
+      <label>Number of Creatures
         <select name='creatureNum' defaultValue='1'>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -99,6 +101,7 @@ class EncounterGenerator extends Component {
             <option value='24'>24</option>
             <option value='25'>25</option>
         </select>
+      </label>
       <br/>
       <button type="submit">Generate Encounter</button>
     </form>

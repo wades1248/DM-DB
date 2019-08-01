@@ -15,8 +15,9 @@ class DMIDInput extends Component {
         return(
             <form onSubmit={this.handleSubmit}>
                 <legend>Use Existing Party</legend>
-                <label>DM ID</label>
-                <input name="dmid" type="text"/>         
+                <label>DM ID
+                    <input name="dmid" type="text"/> 
+                </label>        
                 <button type="submit">Get Party</button>
             </form>
         )

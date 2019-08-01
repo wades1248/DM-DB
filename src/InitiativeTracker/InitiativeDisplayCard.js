@@ -45,8 +45,9 @@ class InitiativeDisplayCard extends Component {
                 </div>
                 <div className="details">
                     <p>AC: {this.props.item.ac}</p>
-                    <label>HP:</label>
-                    <input className="hp" type='integer' onSubmit={this.preventSubmit}/>
+                    <label>HP:
+                        <input className="hp" type='integer' onSubmit={this.preventSubmit}/>
+                    </label>
                     {showPerception(this.props.item)}
                 </div>
                 {showSource(this.props.item)}

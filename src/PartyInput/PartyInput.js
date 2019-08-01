@@ -63,10 +63,11 @@ class PartyInput extends Component {
         return(
         <form className= 'newPartyForm' onSubmit={this.validatePlayer}>
           <legend>Player Info:</legend>
-          <label>Character Name</label>
-          <input name='playerName' type="text" placeholder= 'Pidwick Stumbleduck' required />
+          <label>Character Name
+            <input name='playerName' type="text" placeholder= 'Pidwick Stumbleduck' required />
+          </label>
           <div className='error'>{this.state.error}</div>
-          <label>Level</label>
+          <label>Level
             <select name='playerLevel' required defaultValue='1'>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
@@ -88,9 +89,10 @@ class PartyInput extends Component {
                 <option value='18'>18</option>
                 <option value='19'>19</option>
                 <option value='20'>20</option>
-            </select>                    
+            </select>
+          </label>                    
           <br/>
-          <label>AC</label>
+          <label>AC
           <select name='ac' required defaultValue='12'>
               <option value='1'>1</option>
               <option value='2'>2</option>
@@ -123,8 +125,9 @@ class PartyInput extends Component {
               <option value='29'>29</option>
               <option value='30'>30</option>
             </select>
+          </label>
             <br/>          
-          <label> Passive Perception</label>
+          <label> Passive Perception
           <select name='pp' required defaultValue='12'>
               <option value='1'>1</option>
               <option value='2'>2</option>
@@ -157,9 +160,11 @@ class PartyInput extends Component {
               <option value='29'>29</option>
               <option value='30'>30</option>
             </select>
+          </label>
             <br/>
-            <label>DM ID</label>
+            <label>DM ID
             <input type='text' name='dmid' placeholder='Spencer1234' required/>
+          </label>
             <br/>          
           <button type="submit" name='addPlayer'>
             Add Player
