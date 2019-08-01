@@ -8,10 +8,12 @@ function Generator(params) {
     const rawCreatures = allCreatures;
     const envCreatures =environmentalFilter(environment, rawCreatures);
     const randomEnvCreatures = shuffleArray(envCreatures);
-    const encounterXParray = difficultyFilter(difficulty, creatureNum, players, envCreatures, CRXP);
+    const encounterXParray = difficultyFilter(difficulty, creatureNum, players, envCreatures, CRXP, envCreatures);
     const encounter = makeEncounterArray(encounterXParray, randomEnvCreatures)
+
     return encounter;
 }
+
 function environmentalFilter(environment, creatures) {
     if(environment !== 'any'){
         let filterCreatures = creatures.filter(creature => 
@@ -25,7 +27,7 @@ function environmentalFilter(environment, creatures) {
    }
 
 }
-function difficultyFilter(difficulty, creatureNum, players, envCreatures, CRXP){
+function difficultyFilter(difficulty, creatureNum, players, envCreatures){
     const upperLimit =generateUpperDifficulty(difficulty, players)
     const lowerLimit =generateLowerDifficulty(difficulty, players)
     const creatureNumCoefficient = convertCreautureNum(creatureNum);
@@ -84,9 +86,9 @@ function convertCreautureNum(creatureNum) {
         return(4)
     }
 }
-function procedurallyGenerate (lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, envCreatures){
+function procedurallyGenerate (lowerLimit, upperLimit, creatureNumCoefficient, creatureNum,envCreatures,){
     const countsperCRunfiltered = counterPerCr(upperLimit, creatureNumCoefficient, creatureNum, CRXP)
-    const finalCRarray = tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, countsperCRunfiltered)
+    const finalCRarray = tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, countsperCRunfiltered,envCreatures)
     return finalCRarray
 }
 function counterPerCr(upperLimit, creatureNumCoefficient, creatureNum,){
@@ -113,22 +115,23 @@ function countsPerCRfilter(array){
     return counts;
 
 }
-function tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, countsperCRunfiltered){
-    const countsPerCRfiltered = countsPerCRfilter(countsperCRunfiltered)
+function tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, creatureNum, countsperCRunfiltered,envCreatures){
+    const countsPerCRfiltered = countsPerCRfilter(countsperCRunfiltered)  
     const CRsArray= Object.keys(countsPerCRfiltered)
+    const shuffledCRs = shuffleArray(CRsArray)
     let encounterCRs=[]
   
     for(let bossPosition = 0; bossPosition < (CRsArray.length-1); bossPosition++){
-    for(let bossNum = 0; creatureNum >= bossNum; bossNum++){
+    for(let bossNum = creatureNum; 0 <= bossNum; bossNum--){
             
-            const boss= CRsArray[(bossPosition)]
+            const boss= shuffledCRs[(bossPosition)]
             const minionNum= (creatureNum-bossNum);
             const minionUpperLimit= (upperLimit- (parseInt(boss)*bossNum*creatureNumCoefficient))
             const minionLowerLimit= (lowerLimit- (parseInt(boss)*bossNum*creatureNumCoefficient))
             const countsperCRunfiltered = counterPerCr(minionUpperLimit, creatureNumCoefficient, minionNum)
             const countsPerCRfiltered = countsPerCRfilter(countsperCRunfiltered)
             const minionsArray= Object.keys(countsPerCRfiltered)
-            for(let x= minionsArray.length-1; x>= 0; x--){
+            for(let x= minionsArray.length-1; x>= 0; x--){  
                 const CRvalue= minionsArray[x]
                 const calculcatedXP =(CRvalue*(countsPerCRfiltered[CRvalue])*creatureNumCoefficient)
                 if(calculcatedXP >minionLowerLimit && encounterCRs.length === 0){
@@ -140,13 +143,11 @@ function tryAllpossibilities(lowerLimit, upperLimit, creatureNumCoefficient, cre
                         encounterCRs.push(parseInt(boss))
                     } 
                 }
-            if(encounterCRs.length < creatureNum ){
+            if(encounterCRs.length < creatureNum || makeEncounterArray(encounterCRs,envCreatures).includes(undefined) !== false ){
                     encounterCRs = []
-            }else{break;}
-            } 
-
-        }
-  
+            }else{break}
+        }        
+    } 
     }
     return encounterCRs
 }
@@ -161,4 +162,5 @@ function makeEncounterArray(encounterXParray, randomEnvCreatures){
     const encounter = encounterXParray.map(x=> randomEnvCreatures.find(creature => creature.xp===x))
     return encounter;
 }
+
 export default Generator;
