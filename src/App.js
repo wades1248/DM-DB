@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
+import {Route, BrowserRouter} from 'react-router-dom';
 import Welcome from './PartyInput/Welcome';
 import EncounterGenerator from './Encounter/EncouterGenerator';
 import InitiativeTracker from './InitiativeTracker/InitiativeTracker';
 import UpdatePlayer from './PartyInput/EditPlayer';
+import Instructions from './Instructions.js'
+import NavBar from './NavBar'
 import config from './config';
 import './App.css';
 
@@ -119,6 +121,8 @@ class App extends Component {
   }
   render(){
     return(
+      <BrowserRouter>
+      <NavBar/>
       <main className='App'>
         <div className='content'>
           <Route
@@ -161,8 +165,17 @@ class App extends Component {
               />
             }
           />
+          <Route
+            path='/instructions'
+            render={(props) =>
+              <Instructions
+                {...props}
+              />
+            }
+          />
         </div>
       </main>
+      </BrowserRouter>
     )
   }
 }

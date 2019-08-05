@@ -23,13 +23,36 @@ body{
   list-style-type: none;
   min-height: 100vh;
 }
+.NavBar{
+  margin: 0%;
+  height: 7%;
+  z-index: 10;
+  background-color: rgb(25, 121, 68);
+  position: fixed;
+  top: 0px;
+  color: white;
+  font-size: 25px;
+  left: 0px;
+  right: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20%;
+  padding-left: 20%;
+} 
+.NavBar a {
+  text-decoration: none;
+}
+a{
+  color: white;
+}
 .App { 
   padding-bottom: 7%;
   padding-top:7%;
   max-width: 500px;
   margin: 15px;  
   position: relative;
-  
+  min-height: 100%;
 }
 
 .error{
@@ -52,7 +75,7 @@ input, select{
 select{
   border: 1px solid black;
 }
-li, form{
+li, form, .mainInstrctions{
   color: white;
   background-color: rgba(25, 121, 68, 0.466);
   border-radius: 15px;
@@ -62,7 +85,17 @@ li, form{
   padding-bottom: 5px;
   max-width: 500px;
 }
-.details{
+.mainInstrctions{
+  padding: 10px;
+  background-color: rgba(25, 121, 68, 0.753);
+  font-weight: normal;
+}
+.mainInstrctions a{
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.details, .mainInstrctions{
   text-align: left;
   margin-left: 15px;
   margin-bottom: 10px;
@@ -112,5 +145,8 @@ legend{
   }
   #root{
     background-image: none;
+  }
+  .NavBar{
+    font-size: 15px;
   }
 }
