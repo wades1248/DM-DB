@@ -5,6 +5,7 @@ import Welcome from './PartyInput/Welcome'
 import EncounterGenerator from './Encounter/EncouterGenerator'
 import InitinativeTracker from './InitiativeTracker/InitiativeTracker'
 import Instructions from './Instructions'
+import NavBar from './NavBar'
 
 it('App renders without crashing', () => {
   const div = document.createElement('div');
@@ -33,6 +34,12 @@ it('Initiative tracker Page renders without crashing', () => {
 it('Instructions Page renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App>><Instructions /></App>, div);
+  ReactDOM.unmountComponentAtNode(div); 
+})
+
+it('NAv Bar renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App>><NavBar /></App>, div);
   ReactDOM.unmountComponentAtNode(div); 
 })
 
